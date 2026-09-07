@@ -1,13 +1,10 @@
-﻿using ECommerce.Application.DTOs.Products;
+using ECommerce.Application.Common.Exceptions;
+using ECommerce.Application.DTOs.Products;
 using ECommerce.Application.Interfaces.Repositories;
 using ECommerce.Application.Interfaces.Services;
+using ECommerce.Application.Mappings;
 using ECommerce.Domain.Entities;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ECommerce.Application.Features.Products.Commands.CreateProduct
 {
@@ -29,7 +26,7 @@ namespace ECommerce.Application.Features.Products.Commands.CreateProduct
                 throw new ValidationException($"Product with SKU '{command.SKU}' already exists.");
             }
 
-            var product = new Product(command.Name, command.SKU, command.Price, command.StockQuantity);
+            var product = new Product(command.Name, command.SKU, command.Price, command.StokeQuantity);
 
             await _productRepository.AddAsync(product, cancellationToken);
 
